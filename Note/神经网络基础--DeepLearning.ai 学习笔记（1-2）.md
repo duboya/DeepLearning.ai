@@ -10,7 +10,7 @@
 
 X.shape = ($n_x$, m)
 目标数据的形状：
-Y = [$y_(1), y_(2), ..., y(m)$]
+Y = [$y^{(1)}, y^{(2)}, ..., y^{(m)}$]
 Y.shape = (1,m)
 
 ## 2. logistic Regression
@@ -20,7 +20,35 @@ Y.shape = (1,m)
 ## 3. logistic Regression loss function
 
 **Loss  function**
-![5](https://raw.githubusercontent.com/duboya/DeepLearning.ai-pragramming-code/master/Note_image/5.png)
+
+
+一般经验来说，使用平方错误（squared error）来衡量Loss Function： 
+
+$$L(\hat{y}, y)=\frac{1}{2}(\hat{y} − y)^2$$
+
+但是，对于logistic regression 来说，一般不适用squared error来作为Loss Function，这是因为上面的平方错误损失函数一般是非凸函数（non-convex），其在低纬空间下降收敛的时候，容易得到局部最优解，而不是全局最优解，因此要选择凸函数。
+</font>
+<font color=gray size=2>
+注：高维空间中往往无需考虑极值点是不是最值点的问题。
+</font>
+<font color=gray size=2>
+一是实际工程显示出，即便最后方程只是收敛到极值点，所带来的误差也很小，已经满足工程需求，对于大多数场景，花费更多计算成本寻找最值点在工程中并不是一种很好的解决方案。
+</font>
+<font color=gray size=2>
+二是在高维空间中如N维空间中，若想找到极值点的概率是$p^N$，维度越大，概率越小，这种情况近似可以忽略。在高维空间中更多时候找到的是一种鞍点，但也有很多方法可以跳出鞍点，如以后Ng会介绍的Adam、momentum等。
+</font>
+
+逻辑回归的Loss Function:
+
+
+$$L(\hat{y}, y) =  -(ylog\hat{y} + (1 -y)log(1 - \hat{y})$$
+
+
+- 当y=1时，$L(\hat{y}, y) = -log{\hat{y}}$。如果$\hat{y}$越接近1，$L(\hat{y}, y) \approx 0$，表示预测效果越好；如果$\hat{y}$越接近0，$L(\hat{y}, y) \approx +\infty$，表示预测效果越差；
+
+- 当y=0时，$L(\hat{y}, y) = -log(1 - \hat{y})$。如果$\hat{y}$越接近0，$L(\hat{y}, y) \approx 0$，表示预测效果越好；如果$\hat{y}$越接近1，$L(\hat{y}, y) \approx +\infty$，表示预测效果越差；
+- 我们的目标是最小化样本点的损失Loss Function，损失函数是针对单个样本点的。
+
 
 **Cost function**
 ![6](https://raw.githubusercontent.com/duboya/DeepLearning.ai-pragramming-code/master/Note_image/6.png)
