@@ -20,12 +20,21 @@
 	- 否则，使用更大的神经网络、更好的优化算法
 - 系统在开发集上表现的好 
 	- 否则，使用正则化、更大的训练集
+
+> 因为这种情况的发生往往是因为你overtune了你的Dev set，这时候通过换用更大的dev set会有利于模型优化。
+
 - 系统在测试集上表现的好 
 	- 否则，使用更大的开发集
 - 在真实的系统环境中表现的好 
 	- 否则，修改开发测试集、修改代价函数
 ### 2. 单一数字评估指标
 在训练机器学习模型的时候，无论是调整超参数，还是尝试更好的优化算法，为问题设置一个单一数字评估指标，可以更好更快的评估模型。
+
+![](![](https://raw.githubusercontent.com/duboya/DeepLearning.ai-pragramming-code/master/Note_image/31.1.png))
+
+注意：上图中讲明白了precision、Recall的由来，注意自己老是将Recall理解错！
+此外，accuracy的定义对于给定的测试数据集，分类器正确分类的样本数与总样本数之比。也就是损失函数是0-1损失时测试数据集上的准确率
+accuracy = (True positive + True negative) / (True positive + True negative + False positive + False negative)
 
 #### example1
 下面是分别训练的两个分类器的Precision、Recall以及F1 score。
